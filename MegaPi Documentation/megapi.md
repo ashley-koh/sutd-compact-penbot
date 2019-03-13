@@ -25,37 +25,37 @@ bot.start()
     * **analogRead**( pin, **def** onResult )
 
 3. Motion
-    * DC Motor
+DC Motor
     * **dcMotorRun**( port, speed )
-    * Servo Motor
+Servo Motor
     * **servoRun**( port, angle )
-    * Encoder Motor
+Encoder Motor
     * **encoderMotorRun**( port, speed )
     * **encoderMotorMove**( port, speed, distance, **def** onFinish )
     * **encoderMotorMoveTo**( port, speed, position, **def** onFinish )
     * **encoderMotorSetCurPosZero**( port )
     * **encoderMotorPosition**( port, **def** onResult )
     * **encoderMotorSpeed**( port, **def** onResult )
-    * Stepper Motor
+Stepper Motor
     * **stepperMotorRun**( port, speed )
     * **stepperMotorMove**( port, speed, distance, **def** onFinish )
     * **stepperMotorMoveTo**( port, speed, position, **def** onFinish )
     * **stepperMotorSetCurPosZero**( port )
 
 4. Sensors
-    * Ultrasonic Sensor
+Ultrasonic Sensor
     * **ultrasonicSensorRead** ( port, **def** onResult ) 
-    * LineFollow Sensor
+LineFollow Sensor
     * **lineFollowerRead** ( port, **def** onResult ) 
-    * Light Sensor
+Light Sensor
     * **lightSensorRead** ( port, **def** onResult ) 
-    * Sound Sensor
+Sound Sensor
     * **soundSensorRead** ( port, **def** onResult ) 
-    * Temperature Sensor
+Temperature Sensor
     * **temperatureRead** ( port, **def** onResult ) 
-    * PIR Motion Sensor
+PIR Motion Sensor
     * **pirMotionSensorRead** ( port, **def** onResult ) 
-    * Touch Sensor
+Touch Sensor
     * **touchSensorRead** ( port, **def** onResult ) 
     * LimitSwitch
     * **limitSwitchRead** ( port, slot, **def** onResult ) 
