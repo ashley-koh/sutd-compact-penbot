@@ -23,7 +23,7 @@ export default function sketch(p5, props) {
         maxY = p5.height - eyeHeight/2 - 50;
         minX = eyeWidth/2 + eyeSpacing/2 + 50;
         minY = eyeHeight/2 + 50;
-        p5.frameRate(45);
+        
     }
     
     p5.myCustomRedrawAccordingToNewPropsHandler = function(props) {
@@ -45,11 +45,14 @@ export default function sketch(p5, props) {
             counter = 0;
         }
         render();
+        
     }
     
     function render(percent) {
         p5.background(0);
-        eyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
+        // normalEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
+        // happyEyes(x, y, eyeSpacing, eyeWidth, eyeHeight);
+        sadEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
         easing();
 
         if (blinking)
@@ -71,7 +74,40 @@ export default function sketch(p5, props) {
         }
     }
 
-    function eyes(x, y, hgap, w, h, r) {
+    //Normal Eyes
+    function normalEyes(x, y, hgap, w, h, r) {
+        let halfGap = hgap/2;
+        let xleft = x - halfGap;
+        let xright = x + halfGap;
+        p5.fill("#66ccff")
+        p5.rectMode(p5.CENTER)
+        p5.rect(xleft, y, w, h, r);
+        p5.rect(xright, y, w, h, r);
+        // console.log(`x: ${x}, y: ${y}, w: ${w}`)
+    }
+
+    //Happy Eyes
+    function happyEyes(x, y, hgap, w, h) {
+        let halfGap = hgap/2;
+        let xleft = x - halfGap;
+        let xright = x + halfGap;
+        p5.fill("#66ccff")
+        // p5.rect(xleft, y, w, h, r);
+        // p5.rect(xright, y, w, h, r);
+        
+        p5.ellipse(xleft, y, w, h);
+        p5.ellipse(xright, y, w, h);
+        
+        p5.fill(0);
+        p5.ellipse(xleft, y, w - 50, h - 50);
+        p5.ellipse(xright, y, w - 50, h - 50);
+        p5.rectMode(p5.CENTER)
+        p5.rect(xleft, y + h/2, w, h)
+        p5.rect(xright, y + h/2, w, h)
+    }
+
+    //Sad Eyes
+    function sadEyes(x, y, hgap, w, h, r) {
         let halfGap = hgap/2;
         let xleft = x - halfGap;
         let xright = x + halfGap;
@@ -83,24 +119,25 @@ export default function sketch(p5, props) {
     }
 
     function easing() {
-      let targetX = p5.mouseX;
-      // let targetX = p5.width /2;
-      let dx = targetX - x;
-      x += dx * easingConst;
+        // let targetX = p5.mouseX;
+        // let targetY = p5.mouseY;
+        let targetX = p5.width/2;
+        let targetY = p5.height/2;
 
-      let targetY = p5.mouseY;
-      // let targetY = p5.height /2;
-      let dy = targetY - y;
-      y += dy * easingConst;
+        let dx = targetX - x;
+        x += dx * easingConst;
 
-      if (x > maxX)
-          x = maxX;
-      if (x < minX)
-          x = minX;
-      if (y > maxY)
-          y = maxY;
-      if (y < minY)
-          y = minY;
+        let dy = targetY - y;
+        y += dy * easingConst;
+
+        if (x > maxX)
+            x = maxX;
+        if (x < minX)
+            x = minX;
+        if (y > maxY)
+            y = maxY;
+        if (y < minY)
+            y = minY;
     }
 
     function blink() {

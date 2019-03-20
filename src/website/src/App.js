@@ -3,8 +3,8 @@ import { Button } from 'antd';
 import P5Wrapper from './P5Wrapper';
 import './App.css';
 
-import raspi from 'raspi';
-import { Serial } from 'raspi-serial';
+// import raspi from 'raspi';
+// import { Serial } from 'raspi-serial';
 
 import sketch from './components/face/sketch'
 import Menu from './components/menu/index'
@@ -24,7 +24,7 @@ export default function App() {
           emotion={emotion}
           blinking={blinking}
         />
-        <Movement message={serialMsg} />
+        {/* <Movement message={serialMsg} /> */}
 
         <Button type="primary" onClick={() => setEmotion("sad")}>Become Sad</Button>
         <Button type="primary" onClick={() => setEmotion("happy")}>Become Happy</Button>
@@ -36,21 +36,21 @@ export default function App() {
     return <Menu />
 }
 
-raspi.init(() => {
-  let serial = new Serial();
-  serial.open(() => {
-    serial.on('data', (data) => {
-      process.stdout.write(data);
-    });
-    //serial.write('Happy')
-  })
-})
+// let serial = new Serial();
+// raspi.init(() => {
+//   serial.open(() => {
+//     serial.on('data', (data) => {
+//       process.stdout.write(data);
+//     });
+//     //serial.write('Happy')
+//   })
+// })
 
-function Movement(props) {
-  while(1) {
-    serial.write(props.message);
-    setTimeout(500);
-  }
-}
+// function Movement(props) {
+//   while(1) {
+//     serial.write(props.message);
+//     setTimeout(500);
+//   }
+// }
 
-export default serial;
+// export { serial };
