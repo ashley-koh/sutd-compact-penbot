@@ -3,14 +3,18 @@ import { Button } from 'antd';
 import P5Wrapper from './P5Wrapper';
 import './App.css';
 
+import raspi from 'raspi';
+import { Serial } from 'raspi-serial';
+
 import sketch from './components/face/sketch'
 import Menu from './components/menu/index'
 
-function App() {
+export default function App() {
 
   const [currentPage, setCurrentPage] = useState("face");
   const [emotion, setEmotion] = useState("random");
   const [blinking, setBlinking] = useState(true);
+  const [serialMsg, setSerialMsg] = useState("hf");
 
   if (currentPage === "face") {
     return (
@@ -20,7 +24,7 @@ function App() {
           emotion={emotion}
           blinking={blinking}
         />
-
+        <Movement message={serialMsg} />
 
         <Button type="primary" onClick={() => setEmotion("sad")}>Become Sad</Button>
         <Button type="primary" onClick={() => setEmotion("happy")}>Become Happy</Button>
@@ -32,4 +36,21 @@ function App() {
     return <Menu />
 }
 
-export default App;
+raspi.init(() => {
+  let serial = new Serial();
+  serial.open(() => {
+    serial.on('data', (data) => {
+      process.stdout.write(data);
+    });
+    //serial.write('Happy')
+  })
+})
+
+function Movement(props) {
+  while(1) {
+    serial.write(props.message);
+    setTimeout(500);
+  }
+}
+
+export default serial;

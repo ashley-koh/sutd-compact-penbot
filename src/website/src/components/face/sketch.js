@@ -23,6 +23,7 @@ export default function sketch(p5, props) {
         maxY = p5.height - eyeHeight/2 - 50;
         minX = eyeWidth/2 + eyeSpacing/2 + 50;
         minY = eyeHeight/2 + 50;
+        p5.frameRate(45);
     }
     
     p5.myCustomRedrawAccordingToNewPropsHandler = function(props) {
@@ -44,7 +45,6 @@ export default function sketch(p5, props) {
             counter = 0;
         }
         render();
-        
     }
     
     function render(percent) {
@@ -83,22 +83,24 @@ export default function sketch(p5, props) {
     }
 
     function easing() {
-        let targetX = p5.mouseX;
-        let dx = targetX - x;
-        x += dx * easingConst;
+      let targetX = p5.mouseX;
+      // let targetX = p5.width /2;
+      let dx = targetX - x;
+      x += dx * easingConst;
 
-        let targetY = p5.mouseY;
-        let dy = targetY - y;
-        y += dy * easingConst;
+      let targetY = p5.mouseY;
+      // let targetY = p5.height /2;
+      let dy = targetY - y;
+      y += dy * easingConst;
 
-        if (x > maxX)
-            x = maxX;
-        if (x < minX)
-            x = minX;
-        if (y > maxY)
-            y = maxY;
-        if (y < minY)
-            y = minY;
+      if (x > maxX)
+          x = maxX;
+      if (x < minX)
+          x = minX;
+      if (y > maxY)
+          y = maxY;
+      if (y < minY)
+          y = minY;
     }
 
     function blink() {
