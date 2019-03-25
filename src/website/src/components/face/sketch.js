@@ -108,21 +108,34 @@ export default function sketch(p5, props) {
 
     //Sad Eyes
     function sadEyes(x, y, hgap, w, h, r) {
-        let halfGap = hgap/2;
+        let halfGap = (hgap - 100)/2;
         let xleft = x - halfGap;
         let xright = x + halfGap;
-        p5.fill("#66ccff")
-        p5.rectMode(p5.CENTER)
-        p5.rect(xleft, y, w, h, r);
-        p5.rect(xright, y, w, h, r);
-        // console.log(`x: ${x}, y: ${y}, w: ${w}`)
+        let dy = -(y/480 * 80);
+        let halfHeight = h/4;
+        p5.fill("#66ccff");
+
+        p5.beginShape();
+        p5.vertex(xleft - w, y - halfHeight)
+        p5.curveVertex(xleft, y - halfHeight - 20);
+        p5.curveVertex(xleft, y + halfHeight + 40* h/150 + dy);
+        p5.curveVertex(xleft - w + 10, y + halfHeight + 40 * h/150 + dy)
+        p5.endShape(p5.CLOSE);
+
+        p5.beginShape();
+        p5.vertex(xright + w, y - halfHeight)
+        p5.curveVertex(xright, y - halfHeight - 20)
+        p5.curveVertex(xright, y + halfHeight + 40 * h/150 + dy)
+        p5.curveVertex(xright + w - 10, y + halfHeight + 40 * h/150 + dy)
+        p5.endShape(p5.CLOSE);
+
     }
 
     function easing() {
-        // let targetX = p5.mouseX;
-        // let targetY = p5.mouseY;
-        let targetX = p5.width/2;
-        let targetY = p5.height/2;
+        let targetX = p5.mouseX;
+        let targetY = p5.mouseY;
+        // let targetX = p5.width/2;
+        // let targetY = p5.height/2;
 
         let dx = targetX - x;
         x += dx * easingConst;
