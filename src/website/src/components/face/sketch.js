@@ -50,13 +50,24 @@ export default function sketch(p5, props) {
     
     function render(percent) {
         p5.background(0);
-        // normalEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
-        // happyEyes(x, y, eyeSpacing, eyeWidth, eyeHeight);
-        sadEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
-        easing();
 
+        easing();
+        
         if (blinking)
             blink();
+        
+        // if (currentEmotion === "normal")
+        //     normalEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
+        
+        // if (currentEmotion === "happy")
+        //     happyEyes(x, y, eyeSpacing, eyeWidth, eyeHeight);
+        
+        // if (currentEmotion === "sad")
+        //     sadEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
+
+        // if (currentEmotion === "bored")
+            // sadEyes(x, y, eyeSpacing, eyeWidth, eyeHeight, eyeRadius);
+
     }
 
     function emotion() {
@@ -129,6 +140,10 @@ export default function sketch(p5, props) {
         p5.curveVertex(xright + w - 10, y + halfHeight + 40 * h/150 + dy)
         p5.endShape(p5.CLOSE);
 
+    }
+
+    function boredEyes(x, y, hgap, w, h, r) {
+        
     }
 
     function easing() {
