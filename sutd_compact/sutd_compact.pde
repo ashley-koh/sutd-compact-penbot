@@ -1,6 +1,6 @@
 import processing.serial.*;
 
-Serial myPort;
+Serial Mega, Nano;
 String val;
 
 int totalFrames = 120;
@@ -14,17 +14,24 @@ int eyeSpacing = 200;
 float x, y, minX, minY, maxX, maxY, targetX, targetY;
 float easingConst = 0.02;
 
-String currentEmotion = "sleepy";
+
+char currentDirection = 's'; // 
+String currentEmotion = "n"; // n, h, s, b, a
 Boolean randomEmotion = false;
 Boolean blinking = false;
+
 
 DrawEyes Eyes = new DrawEyes(eyeWidth, eyeHeight, eyeRadius);
 
 void setup() {
   size(800, 480);
   //fullScreen();
-  //String portName = Serial.list()[0];
-  //myPort = new Serial(this, portName, 9600); // myPort.write("Whatever String");
+  printArray(Serial.list());
+  //String portMega = Serial.list()[0];
+  String portNano = Serial.list()[0];
+  //String
+  //Mega = new Serial(this, portName, 9600); // Mega.write("Whatever String");
+  Nano = new Serial(this, portNano, 9600); // Handling Movement
   
   x = width/2;
   y = height/2;
@@ -45,6 +52,8 @@ void draw() {
      counter = 0;
   }
   render();
+  Nano.write(currentDirection);
+  println("Sending: " + currentDirection);
 }
 
 void render() {
@@ -70,5 +79,25 @@ void emotion() {
       currentEmotion = "neutral";
     if (random > 85)
       currentEmotion = "angry";
+  }
+}
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) {
+      currentDirection = 'f';
+    } else if (keyCode == DOWN) {
+      currentDirection = 'b';
+    } else if (keyCode == RIGHT) {
+      currentDirection = 'r';
+    } else if (keyCode == LEFT) {
+      currentDirection = 'l'; 
+    } 
+  }
+}
+
+void keyReleased() {
+  if (key == CODED) {
+     currentDirection = 's'; 
   }
 }
