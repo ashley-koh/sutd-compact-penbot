@@ -14,7 +14,7 @@ int eyeSpacing = 200;
 float x, y, minX, minY, maxX, maxY, targetX, targetY;
 float easingConst = 0.02;
 
-
+String upcomingDirection = "s";
 char currentDirection = 's'; // 
 String currentEmotion = "n"; // n, h, s, b, a
 Boolean randomEmotion = false;
@@ -29,7 +29,7 @@ void setup() {
   printArray(Serial.list());
   String portMega = Serial.list()[1]; //"/dev/ttyACM0
   String portNano = Serial.list()[3]; //"/dev/ttyUSB0
-  //String
+  
   Mega = new Serial(this, portMega, 9600); // Mega.write("Whatever String");
   Nano = new Serial(this, portNano, 9600); // Handling Movement
   
@@ -52,8 +52,8 @@ void draw() {
      counter = 0;
   }
   render();
-  //Nano.write(currentDirection);
-  //println("Sending Nano: " + currentDirection);
+  Nano.write(currentDirection);
+  println("Sending Nano: " + currentDirection);
   //Mega.write(currentEmotion);
   //println("Sending Mega: " + currentEmotion);
 }
@@ -97,36 +97,49 @@ void keyPressed() {
     } 
   }
   
-  if (key == 'h') {
-    
-    println("sending Mega: h");
-    //currentEmotion = " h";
-    Mega.write(" h");
+  if (key == '2') {
+    currentEmotion = "h";
   }
-  if (key == 'n') {
-    println("sending Mega: n");
-    //currentEmotion = "n";
-    Mega.write(" n");
+  if (key == '1') {
+    currentEmotion = "n";
   }
-  if (key == 's') {
-    println("sending Mega: s");
-    //currentEmotion = "s";
-    Mega.write(" s");
+  if (key == '3') {
+    currentEmotion = "s";
   }
-  if (key == 'b') {
-    println("sending Mega: b");
-    //currentEmotion = "b";
-    Mega.write(" b");
+  if (key == '4') {
+    currentEmotion = "b";
+  }
+  if (key == '5') {
+    currentEmotion = "a";
+  }
+  
+  if (key == 'w') {
+    upcomingDirection = "f";
+    //Mega.write(upcomingDirection + currentEmotion);
+    println("Sending Mega: " + upcomingDirection + currentEmotion);
   }
   if (key == 'a') {
-    println("sending Mega: a");
-    //currentEmotion = "a";
-    Mega.write(" a");
+    upcomingDirection = "l"; 
+    //Mega.write(upcomingDirection + currentEmotion);
+    println("Sending Mega: " + upcomingDirection + currentEmotion);
+  }
+  if (key == 's') {
+    upcomingDirection = "b"; 
+    //Mega.write(upcomingDirection + currentEmotion);
+    println("Sending Mega: " + upcomingDirection + currentEmotion);
+  }
+  if (key == 'd') {
+    upcomingDirection = "r"; 
+    //Mega.write(upcomingDirection + currentEmotion);
+    println("Sending Mega: " + upcomingDirection + currentEmotion);
   }
 }
 
 void keyReleased() {
   if (key == CODED) {
      currentDirection = 's'; 
+  }
+  if (key == 'w' || key == 'a' || key == 's' || key == 'd') {
+     upcomingDirection = "s"; 
   }
 }
