@@ -41,19 +41,82 @@ public class DrawEyes {
      float halfHeight = eyeHeight/4;
      
      fill(red, green, blue);
+     
      beginShape();
-     vertex(xleft-w, y-halfHeight);
+     curveVertex(xleft-w, y-halfHeight+50);
+     curveVertex(xleft-w, y-halfHeight);
      curveVertex(xleft, y-halfHeight-20);
      curveVertex(xleft, y+halfHeight+40*h/150+dy);
      curveVertex(xleft-w+10, y+halfHeight+40*h/150+dy);
-     endShape(CLOSE);
+     curveVertex(xleft-w, y-halfHeight);
+     curveVertex(xleft-10, y-halfHeight);
+     endShape();
      
      beginShape();
-     vertex(xright+w, y-halfHeight);
+     curveVertex(xright+w, y-halfHeight+50);
+     curveVertex(xright+w, y-halfHeight);
      curveVertex(xright, y-halfHeight-20);
      curveVertex(xright, y+halfHeight+40*h/150+dy);
      curveVertex(xright+w-10, y+halfHeight+40*h/150+dy);
+     curveVertex(xright+w, y-halfHeight);
+     curveVertex(xright+10, y-halfHeight);
+     endShape();
+  }
+  
+  public void bored(int red, int green, int blue) {
+     int halfGap = eyeSpacing/4;
+     float xleft = x - halfGap;
+     float xright = x + halfGap;
+     float halfHeight = eyeHeight/8;
+     
+     fill(red, green, blue);
+     
+     beginShape();
+     curveVertex(xleft-w, y-halfHeight);
+     curveVertex(xleft-w, y-halfHeight);
+     curveVertex(xleft, y-halfHeight-20);
+     curveVertex(xleft, y+halfHeight-20);
+     curveVertex(xleft-w, y+halfHeight);
+     curveVertex(xleft-w+10, y-halfHeight-100);
      endShape(CLOSE);
+     
+     beginShape();
+     curveVertex(xright+w, y-halfHeight);
+     curveVertex(xright+w, y-halfHeight);
+     curveVertex(xright, y-halfHeight-20);
+     curveVertex(xright, y+halfHeight-20);
+     curveVertex(xright+w, y+halfHeight);
+     curveVertex(xright+w-10, y-halfHeight-100);
+     endShape(CLOSE);
+  }
+  
+  public void angry(int red, int green, int blue) {
+     int halfGap = eyeSpacing/4;
+     float xleft = x - halfGap;
+     float xright = x + halfGap;
+     float halfHeight = eyeHeight/3;
+     
+     fill(red, green, blue);
+     
+     beginShape();
+     curveVertex(xleft-w-10, y+halfHeight-50);
+     curveVertex(xleft-w-20, y-halfHeight);
+     curveVertex(xleft, y-halfHeight+40);
+     curveVertex(xleft, y+halfHeight);
+     curveVertex(xleft-w, y+halfHeight);
+     curveVertex(xleft-w-22, y+halfHeight-50);
+     curveVertex(xleft-w, y-halfHeight);
+     endShape();
+     
+     beginShape();
+     curveVertex(xright+w+10, y+halfHeight-50);
+     curveVertex(xright+w+20, y-halfHeight);
+     curveVertex(xright, y-halfHeight+40);
+     curveVertex(xright, y+halfHeight);
+     curveVertex(xright+w, y+halfHeight);
+     curveVertex(xright+w+22, y+halfHeight-50);
+     curveVertex(xright+w, y-halfHeight);
+     endShape();
   }
   
   public void blink() {
@@ -82,9 +145,9 @@ public class DrawEyes {
   }
   
   public void randomPos() {
-    if (counter == totalFrames && random(0, 100) >= 75) {
-      targetX = random(0, width);
-      targetY = random(0, height);
+    if (counter == totalFrames && random(0, 100) >= 50) {
+      targetX = random(100, width-100);
+      targetY = random(50, height-50);
     }
   }
 }
